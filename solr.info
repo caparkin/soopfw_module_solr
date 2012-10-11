@@ -1,0 +1,8 @@
+;Information
+version = 1
+name = "Solr"
+description = "Provides Solr search"
+
+;Define rights
+rights[] = "admin.solr.manage"
+
