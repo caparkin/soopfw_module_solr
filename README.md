@@ -10,7 +10,7 @@ After that you need to enable the module.
 
 Login with the admin account or use the **clifs** command to enable/install the module.
 
-Now you need to really be logged in with the admin account.
+Now you need to be really logged in with the admin account.
 Go to the solr menu entry and create a server.
 
 If the server is successfully created you can use the SolrFactor to retrieve the Apache_Solr_Service object
