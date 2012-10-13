@@ -1,6 +1,6 @@
 # Soopfw module: Solr
 
-Solr is a [SoopFw](http://soopfw.org) extension .
+Solr is a [SoopFw](http://soopfw.org) extension.
 
 The module will provide solr search functionality for the [SoopFw framework](http://soopfw.org).
 
