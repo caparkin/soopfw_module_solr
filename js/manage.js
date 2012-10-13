@@ -7,12 +7,12 @@ var add_server_uuid = 0;
 
 Soopfw.behaviors.solr_admin_manage = function() {
 
-	// Open add dialog
+	// Open add dialog.
 	$("#add_server").off('click').on('click', function() {
 		add_server_uuid = Soopfw.default_action_dialog(Soopfw.t("Add server"), 'solr', 'save_server');
 	});
 
-	// Open edit dialog
+	// Open edit dialog.
 	$(".edit_server").off('click').on('click', function() {
 		add_server_uuid = Soopfw.default_action_dialog(Soopfw.t("Save server"), $(this).attr('href'), true);
 	});
@@ -71,18 +71,18 @@ Soopfw.behaviors.solr_admin_manage = function() {
 	$(".dmyDelete").off('click').on('click', function() {
 		var values = $(this).attr('did');
 		confirm(Soopfw.t("Really want to delete this server?"), Soopfw.t("delete?"), function() {
-			ajax_success("/solr/delete_server.ajax",{id: values[1]},Soopfw.t("Server deleted"), Soopfw.t("delete?"),function() {
-				$("#server_row_"+values[1]).remove();
+			ajax_success("/solr/delete_server.ajax",{id: values},Soopfw.t("Server deleted"), Soopfw.t("delete?"),function() {
+				$("#server_row_"+values).remove();
 			});
 		});
 	});
 };
 
 /**
- * If the server save succeed, it will call this method
+ * If the server save succeed, it will call this method.
  */
 function save_server_success() {
-	//Close the server dialog
+	// Close the server dialog.
 	$("#"+add_server_uuid).dialog("destroy");
 	$("#"+add_server_uuid).remove();
 
