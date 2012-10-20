@@ -78,9 +78,19 @@ class SolrSearch implements SolrSearchProvider {
 	 * Construct.
 	 *
 	 * @param SolrSearchServerConfiguration $server_config
+	 *   The server configuration. (optional, default = null)
+	 */
+	public function __construct(SolrSearchServerConfiguration $server_config = null) {
+		$this->server_config = $server_config;
+	}
+
+	/**
+	 * Set the solr server config.
+	 *
+	 * @param SolrSearchServerConfiguration $server_config
 	 *   The server configuration.
 	 */
-	public function __construct(SolrSearchServerConfiguration $server_config) {
+	public function set_server_config(SolrSearchServerConfiguration $server_config) {
 		$this->server_config = $server_config;
 	}
 
