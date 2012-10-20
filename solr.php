@@ -54,7 +54,7 @@ class solr extends ActionModul
 	 */
 	public function hook_cron(Cron &$cron) {
 		// Get the intervall when the solr index actions will be committed
-		$runtime = (int)$this->core->get_dbconfig("solr", self::CONFIG_COMMIT_INTERVAL, '');
+		$runtime = (int)$this->core->get_dbconfig("solr", self::CONFIG_COMMIT_INTERVAL, 1);
 		if (!empty($runtime)) {
 			// Commit all actions.
 			if (((strtotime(date('Y-m-d H:i:00', TIME_NOW))/60) % $runtime) === 0) {
