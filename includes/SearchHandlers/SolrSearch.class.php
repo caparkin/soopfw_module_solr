@@ -18,6 +18,16 @@ class SolrSearch implements SolrSearchProvider {
 	const FACET_METHOD_ENUM = 'enum';
 	const FACET_METHOD_FC = 'fc';
 
+	const SORT_ASC = 'asc';
+	const SORT_DESC = 'desc';
+
+	/**
+	 * Holds the last results from search.
+	 *
+	 * @var array
+	 */
+	private $last_result = array();
+
 	/**
 	 * The server configuration.
 	 *
@@ -75,6 +85,13 @@ class SolrSearch implements SolrSearchProvider {
 	protected $highlight_fields = array();
 
 	/**
+	 * This holds all fields and direction on which we want sort.
+	 *
+	 * @var array
+	 */
+	protected $sort = array();
+
+	/**
 	 * Construct.
 	 *
 	 * @param SolrSearchServerConfiguration $server_config
@@ -82,6 +99,21 @@ class SolrSearch implements SolrSearchProvider {
 	 */
 	public function __construct(SolrSearchServerConfiguration $server_config = null) {
 		$this->server_config = $server_config;
+	}
+
+	/**
+	 * Set / Add the given field and direction for sorting.
+	 *
+	 * Mutliple calls on same field is NOT ALLOWED and will produce errors.
+	 *
+	 * @param string $field
+	 *   the field.
+	 * @param string $direction
+	 *   the direction, use one of SolrSearch::SORT_*
+	 *   (optional, default = SolrSearch::SORT_ASC)
+	 */
+	public function sort($field, $direction = self::SORT_ASC) {
+		$this->sort[] = $field . ' ' .$direction;
 	}
 
 	/**
@@ -480,6 +512,10 @@ class SolrSearch implements SolrSearchProvider {
 			$params['hl.fl'] = implode(",", $this->highlight_fields);
 		}
 
+		if (!empty($this->sort)) {
+			$params['sort'] = implode(",", $this->sort);
+		}
+
 		if (!empty($this->facet_fields)) {
 			$params['facet.field'] = $this->facet_fields;
 		}
@@ -500,10 +536,10 @@ class SolrSearch implements SolrSearchProvider {
 	 *
 	 * @param string $q
 	 *   the search string provided by the user.
-	 * @param int $offset
-	 *   the offset (optional, default = 0)
 	 * @param int $limit
 	 *   the limit (optional, default = 10)
+	 * @param int $offset
+	 *   the offset (optional, default = 0)
 	 * @param SolrSearchServerConfiguration $config
 	 *   the configuration to get the server which will be used.
 	 *
@@ -531,7 +567,7 @@ class SolrSearch implements SolrSearchProvider {
 	 *
 	 *   If the server could not be found return false
 	 */
-	public function search($s, $offset = 0, $limit = 10, SolrSearchServerConfiguration $config = null) {
+	public function search($s, $limit = 10, $offset = 0, SolrSearchServerConfiguration $config = null) {
 
 		$server_config = $this->server_config;
 
@@ -570,7 +606,57 @@ class SolrSearch implements SolrSearchProvider {
 		if (!empty($return['facet_counts'])) {
 			$results['facets'] = $return['facet_counts'];
  		}
+
+		$this->last_result = $results;
 		return $results;
+	}
+
+	/**
+	 * Returns the results from the search.
+	 *
+	 * @return array The results
+	 */
+	public function get_results() {
+		if (empty($this->last_result)) {
+			return array();
+		}
+
+		return $this->last_result['docs'];
+	}
+
+	/**
+	 * Returns the complete result count (ignores the limit count)
+	 *
+	 * @return int The complete result count
+	 */
+	public function get_result_count() {
+		if (empty($this->last_result['numFound'])) {
+			return 0;
+		}
+
+		return $this->last_result['numFound'];
+	}
+
+	/**
+	 * Returns all found facets, or if $field is provided the facets for that field.
+	 *
+	 * @param string $field
+	 *   if provided we will only get back the facet for the given field. (optional, default = '')
+	 * @return array The facet results or false on error.
+	 */
+	public function get_result_facets($field = '') {
+		if (!isset($this->last_result['facets'])) {
+			return false;
+		}
+
+		if (!empty($field)) {
+			if (!isset($this->last_result['facets']['facet_fields']) || !isset($this->last_result['facets']['facet_fields'][$field])) {
+				return false;
+			}
+			return $this->last_result['facets']['facet_fields'][$field];
+		}
+
+		$this->last_result['facets']['facet_fields'];
 	}
 }
 
