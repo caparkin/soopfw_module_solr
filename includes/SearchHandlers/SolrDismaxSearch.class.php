@@ -70,6 +70,16 @@ class SolrDismaxSearch extends SolrSearch implements SolrSearchProvider {
 	}
 
 	/**
+	 * Remove all query fields.
+	 *
+	 * @return SolrDismaxSearch Self returning.
+	 */
+	public function &clear_query_fields() {
+		$this->query_fields = array();
+		return $this;
+	}
+
+	/**
 	 * Configures one clause option for the mm param.
 	 *
 	 * For detailed information please look at:
