@@ -155,7 +155,7 @@ abstract class SolrAbstractDataManagement extends AbstractDataManagment
 	 *
 	 * @return string the unique id.
 	 */
-	abstract protected function get_solr_unique_id();
+	abstract public function get_solr_unique_id();
 
 	/**
 	 * Returns the apache solr server instance.
@@ -170,6 +170,6 @@ abstract class SolrAbstractDataManagement extends AbstractDataManagment
 	 *
 	 * @return Apache_Solr_Document The apache solr document.
 	 */
-	abstract protected function get_solr_document();
+	abstract public function get_solr_document();
 }
 
