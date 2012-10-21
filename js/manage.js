@@ -36,7 +36,7 @@ Soopfw.behaviors.solr_admin_manage = function() {
 		if(value == "delete") {
 
 			// Display confirm dialog.
-			confirm(Soopfw.t("Really want to delete this server?"), Soopfw.t("delete?"), function() {
+			confirm(Soopfw.t("Really want to delete the selected servers?"), Soopfw.t("delete?"), function() {
 
 				// Iterate through all entries.
 				$(".dmySelect").each(function(a, obj) {
@@ -48,6 +48,28 @@ Soopfw.behaviors.solr_admin_manage = function() {
 						ajax_request("/solr/delete_server.ajax",{id: $(obj).prop("value")},function() {
 							$("#server_row_"+$(obj).prop("value")).remove();
 						});
+					}
+				});
+
+				// Reset multi action.
+				$(".dmySelect").prop("checked", false);
+				$("#dmySelectAll").prop("checked", false);
+			});
+		}
+		// Commit changes.
+		if(value == "commit") {
+
+			// Display confirm dialog.
+			confirm(Soopfw.t("Really want to commit all pending changes to the selected servers?"), Soopfw.t("Commit"), function() {
+
+				// Iterate through all entries.
+				$(".dmySelect").each(function(a, obj) {
+
+					// Check if we checked the checkbox.
+					if($(obj).prop("checked") == true) {
+
+						// Delete the server.
+						ajax_request("/solr/commit_server.ajax",{id: $(obj).prop("value")});
 					}
 				});
 
@@ -74,6 +96,14 @@ Soopfw.behaviors.solr_admin_manage = function() {
 			ajax_success("/solr/delete_server.ajax",{id: values},Soopfw.t("Server deleted"), Soopfw.t("delete?"),function() {
 				$("#server_row_"+values).remove();
 			});
+		});
+	});
+
+	// Commit a single entry.
+	$(".dmyCommit").off('click').on('click', function() {
+		var values = $(this).attr('did');
+		confirm(Soopfw.t("Really want to commit all pending changes to this server?"), Soopfw.t("Commit"), function() {
+			ajax_success("/solr/commit_server.ajax",{id: values},Soopfw.t("Server changes committed"), Soopfw.t("Commit"));
 		});
 	});
 };

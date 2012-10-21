@@ -7,7 +7,7 @@
 		<tr>
 			<td style="width: 25px;text-align: center;"><input type="checkbox" id="dmySelectAll" class="input_checkbox"/></td>
 			<td style="text-align: left;"><%t key='Server'%></td>
-			<td style="width: 25px;text-align: center;"></td>
+			<td style="width: 50px;text-align: center;"></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,7 +15,10 @@
 		<tr id="server_row_<%$server.id%>">
 			<td style="text-align: center;"><input type="checkbox" name="selected[]" value="<%$server.id%>" id="dmySelect_<%$server.id%>" class="dmySelect input_checkbox"/></td>
 			<td style="text-align: left;"><a href="/solr/save_server/<%$server.id%>" class="edit_server" onclick="return false;"><span><%$server.server%></span></a></td>
-			<td style="text-align: center;" class="linkedElement_grey dmyDelete" did="<%$server.id%>"><img src="/1x1_spacer.gif" class="ui-icon-soopfw ui-icon-soopfw-cancel" title="<%t key='delete?'%>" alt="<%t key='delete?'%>"></td>
+			<td style="text-align: center;">
+				<img src="/modules/solr/templates/images/commit.png" class="ui-icon-soopfw linkedElement dmyCommit" style="background: none" did="<%$server.id%>" title="<%t key='commit server'%>" alt="<%t key='commit server'%>">
+				<img src="/1x1_spacer.gif" class="ui-icon-soopfw ui-icon-soopfw-cancel linkedElement dmyDelete" did="<%$server.id%>" title="<%t key='delete?'%>" alt="<%t key='delete?'%>">
+			</td>
 		</tr>
 	<%foreachelse%>
 	<tr>
@@ -30,6 +33,7 @@
 	&nbsp;&nbsp;&nbsp;<img src="/templates/images/multi_choose_arrow.png">
 	<select id="multi_action">
 		<option value=""><%t key='selected:'%></option>
+		<option value="commit"><%t key='commit'%></option>
 		<option value="delete"><%t key='delete?'%></option>
 	</select>
 </div>
