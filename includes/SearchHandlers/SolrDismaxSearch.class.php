@@ -258,9 +258,9 @@ class SolrDismaxSearch extends SolrSearch implements SolrSearchProvider {
 	}
 
 	/**
-	 * Returns all query parameters
+	 * Returns all query parameters.
 	 *
-	 * @return array An array with all parameters which can be used to generate a get or post request
+	 * @return array An array with all parameters which can be used to generate a get or post request.
 	 */
 	public function get_query_parameter() {
 

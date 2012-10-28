@@ -3,14 +3,14 @@
 interface SolrSearchProvider {
 
 	/**
-	 * Returns all query parameters
+	 * Returns all query parameters.
 	 *
-	 * @return array An array with all parameters which can be used to generate a get or post request
+	 * @return array An array with all parameters which can be used to generate a get or post request.
 	 */
 	public function get_query_parameter();
 
 	/**
-	 * Executes the search
+	 * Executes the search.
 	 *
 	 * @param string $q
 	 *   the search string provided by the user.
@@ -21,8 +21,9 @@ interface SolrSearchProvider {
 	 * @param SolrSearchServerConfiguration $config
 	 *   the configuration to get the server which will be used.
 	 *
-	 * @return array
-	 *   An array with Apache_Solr_Document objects.
+	 * @return array An array with Apache_Solr_Document objects.
+	 *
+	 * @throws SoopfwSolrException Will be thrown if it can't connect the solr service server.
 	 */
 	public function search($s, $offset = 0, $limit = 0, SolrSearchServerConfiguration $config = null);
 }

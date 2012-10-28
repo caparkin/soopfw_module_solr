@@ -495,9 +495,9 @@ class SolrSearch implements SolrSearchProvider {
 	}
 
 	/**
-	 * Returns all query parameters
+	 * Returns all query parameters.
 	 *
-	 * @return array An array with all parameters which can be used to generate a get or post request
+	 * @return array An array with all parameters which can be used to generate a get or post request.
 	 */
 	public function get_query_parameter() {
 		$params = $this->query_parameter;
@@ -532,7 +532,7 @@ class SolrSearch implements SolrSearchProvider {
 	}
 
 	/**
-	 * Executes the search
+	 * Executes the search.
 	 *
 	 * @param string $q
 	 *   the search string provided by the user.
@@ -543,8 +543,8 @@ class SolrSearch implements SolrSearchProvider {
 	 * @param SolrSearchServerConfiguration $config
 	 *   the configuration to get the server which will be used.
 	 *
-	 * @return array
-	 *   An array with the response.
+	 * @return array|boolean Returns false if the server could not be found, else
+	 *   an array with the response.
 	 *
 	 *   The response array includes normaly:
 	 *   array(
@@ -565,7 +565,7 @@ class SolrSearch implements SolrSearchProvider {
 	 *      'facets' => the found facets
 	 *   )
 	 *
-	 *   If the server could not be found return false
+	 * @throws SoopfwSolrException Will be thrown if it can't connect the solr service server.
 	 */
 	public function search($s, $limit = 10, $offset = 0, SolrSearchServerConfiguration $config = null) {
 
@@ -588,7 +588,7 @@ class SolrSearch implements SolrSearchProvider {
 		}
 
 		if (empty($server)) {
-			return false;
+			throw new SoopfwSolrException(t('Could not connect to the solr server instance'));
 		}
 
 		$response = $server->search($s, $offset, $limit, $params, $server_config->get(SolrSearchServerConfiguration::SEARCH_METHOD, Apache_Solr_Service::METHOD_GET));
