@@ -29,7 +29,7 @@ class SolrServerObj extends AbstractDataManagment
 
 		$this->db_struct->add_reference_key("id");
 		$this->db_struct->set_auto_increment("id");
-
+		
 		$this->db_struct->add_hidden_field("id", t("Solr ServerID"), PDT_INT);
 		$this->db_struct->add_required_field("server", t("Solr Servername"), PDT_STRING, 'default');
 		$this->db_struct->add_required_field("host", t("Solr host"), PDT_STRING, $this->core->core_config('core', 'domain'));
@@ -39,7 +39,7 @@ class SolrServerObj extends AbstractDataManagment
 		$this->db_struct->add_field("password", t("Solr password"), PDT_PASSWORD);
 
 		$this->db_struct->add_index(MysqlTable::INDEX_TYPE_UNIQUE, 'server');
-		
+
 		$this->set_default_fields();
 
 		if (!empty($id)) {
