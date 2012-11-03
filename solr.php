@@ -6,7 +6,7 @@
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
  */
-class solr extends ActionModul
+class Solr extends ActionModul
 {
 	/**
 	 * The default method
