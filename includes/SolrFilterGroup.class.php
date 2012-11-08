@@ -26,7 +26,7 @@ class SolrFilterGroup
 	/**
 	 * The grouped conditions.
 	 *
-	 * @var Array
+	 * @var array
 	 */
 	private $conditions = array();
 
