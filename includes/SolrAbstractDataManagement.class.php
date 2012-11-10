@@ -6,7 +6,7 @@
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
  */
-abstract class SolrAbstractDataManagement extends AbstractDataManagment
+abstract class SolrAbstractDataManagement extends AbstractDataManagement
 {
 	/**
 	 * Save the given Data

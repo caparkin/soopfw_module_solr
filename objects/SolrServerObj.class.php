@@ -6,7 +6,7 @@
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
  */
-class SolrServerObj extends AbstractDataManagment
+class SolrServerObj extends AbstractDataManagement
 {
 	/**
 	 * Define constances
