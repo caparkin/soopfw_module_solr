@@ -50,6 +50,12 @@ class Solr extends ActionModul
 	 * Implements hook: cron
 	 *
 	 * Allow other modules to run cron's
+	 *
+	 * @param Cron $cron
+	 *   A cron object.
+	 *   So we don't need to initialize this object within every hook
+	 *   to use it.
+	 *   Its just a helper for performance
 	 */
 	public function hook_cron(Cron &$cron) {
 		// Get the intervall when the solr index actions will be committed
