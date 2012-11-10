@@ -30,16 +30,14 @@ class cli_solr_commit extends CLICommand
 
 		// Loop through all servers
 		foreach ($filter->select_all() AS $row) {
-			CliHelper::console_log(t('Server: @server', array('@server' => $row['server'])), 'ok');
-
 			// Create the server and if available, commit it.
 			$service = SolrFactory::create_instance($row['id']);
 			if ($service !== false)  {
 				$service->commit();
-				CliHelper::console_log(t('committed'), 'ok');
+				$this->core->message(t('Committed server: @server', array('@server' => $row['server'])), Core::MESSAGE_TYPE_SUCCESS);
 			}
 			else {
-				CliHelper::console_log(t('offline'), 'error');
+				$this->core->message(t('Can not contact solr server: @server', array('@server' => $row['server'])), Core::MESSAGE_TYPE_ERROR);
 			}
 		}
 
