@@ -1,7 +1,16 @@
 <?php
 
-class SolrSearchServerConfiguration extends Configuration {
-
+/**
+ * Provides a configuration for solr search.
+ *
+ * This will be provided to the SolrSearch class
+ *
+ * @copyright Christian Ackermann (c) 2010 - End of life
+ * @author Christian Ackermann <prdatur@gmail.com>
+ * @category Configurations
+ */
+class SolrSearchServerConfiguration extends Configuration
+{
 	/**
 	 * Is used to get the server by module database configuration.
 	 * This is the database configuration key.
@@ -43,5 +52,5 @@ class SolrSearchServerConfiguration extends Configuration {
 	 * @param string
 	 */
 	const SEARCH_METHOD = 3;
-}
 
+}

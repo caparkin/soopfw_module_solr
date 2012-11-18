@@ -5,6 +5,7 @@
  *
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
+ * @category Search
  */
 class SolrSearch implements SolrSearchProvider {
 
@@ -578,7 +579,10 @@ class SolrSearch implements SolrSearchProvider {
 			return false;
 		}
 
+		// Get all parameters for the search query.
 		$params = $this->get_query_parameter();
+
+		// Initialize the solr service.
 		if ($server_config->is_set(SolrSearchServerConfiguration::SOLR_INSTANCE)) {
 			$server = $server_config->get(SolrSearchServerConfiguration::SOLR_INSTANCE);
 		}
@@ -586,14 +590,19 @@ class SolrSearch implements SolrSearchProvider {
 			$server = SolrFactory::create_instance(SolrSearchServerConfiguration::DB_CONFIG_MODULE, SolrSearchServerConfiguration::DB_CONFIG_KEY);
 		}
 
+		// Validate that we have a solr server instance.
 		if (empty($server)) {
 			throw new SoopfwSolrException(t('Could not connect to the solr server instance'));
 		}
 
+		// Execute the search request.
 		$response = $server->search($s, $offset, $limit, $params, $server_config->get(SolrSearchServerConfiguration::SEARCH_METHOD, Apache_Solr_Service::METHOD_GET));
 
+		// Parse the result.
 		$return = json_decode($response->getRawResponse(), true);
 		$results = $return['response'];
+
+		// Get a quick access to the highlighted elements.
 		if (!empty($return['highlighting'])) {
 			foreach ($results['docs'] AS &$row) {
 				if (isset($return['highlighting'][$row['id']])) {
@@ -602,11 +611,15 @@ class SolrSearch implements SolrSearchProvider {
 			}
  		}
 
+		// Get the facet count
 		if (!empty($return['facet_counts'])) {
 			$results['facets'] = $return['facet_counts'];
  		}
 
+		// Store this result as the last result so we can get it again without requesting twice.
 		$this->last_result = $results;
+
+		// Return the result.
 		return $results;
 	}
 

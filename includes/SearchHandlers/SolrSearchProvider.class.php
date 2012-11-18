@@ -1,6 +1,14 @@
 <?php
 
-interface SolrSearchProvider {
+/**
+ * Provide an interface for a solr search provider.
+ *
+ * @copyright Christian Ackermann (c) 2010 - End of life
+ * @author Christian Ackermann <prdatur@gmail.com>
+ * @category Search
+ */
+interface SolrSearchProvider
+{
 
 	/**
 	 * Returns all query parameters.
@@ -15,9 +23,9 @@ interface SolrSearchProvider {
 	 * @param string $q
 	 *   the search string provided by the user.
 	 * @param int $offset
-	 *   the offset (optional, default = 0)
+	 *   the offset. (optional, default = 0)
 	 * @param int $limit
-	 *   the limit (optional, default = 0)
+	 *   the limit. (optional, default = 0)
 	 * @param SolrSearchServerConfiguration $config
 	 *   the configuration to get the server which will be used.
 	 *

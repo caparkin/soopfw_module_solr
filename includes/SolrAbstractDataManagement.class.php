@@ -5,6 +5,7 @@
  *
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
+ * @category Module
  */
 abstract class SolrAbstractDataManagement extends AbstractDataManagement
 {

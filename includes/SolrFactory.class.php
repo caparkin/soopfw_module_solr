@@ -5,6 +5,7 @@
  *
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
+ * @category Module
  */
 class SolrFactory extends Object
 {
@@ -89,7 +90,7 @@ class SolrFactory extends Object
 	 *   If set to true it will have an empty entry with 'none' as key and 'None' as value at the
 	 *   first array index.
 	 *   Usefull for configurations (optional, default = false)
-	 * 
+	 *
 	 * @return array The data.
 	 */
 	public function get_all_instances($include_empty = false) {

@@ -5,6 +5,7 @@
  *
  * @copyright Christian Ackermann (c) 2010 - End of life
  * @author Christian Ackermann <prdatur@gmail.com>
+ * @category Objects
  */
 class SolrServerObj extends AbstractDataManagement
 {
@@ -28,7 +29,7 @@ class SolrServerObj extends AbstractDataManagement
 
 		$this->db_struct->add_reference_key("id");
 		$this->db_struct->set_auto_increment("id");
-		
+
 		$this->db_struct->add_hidden_field("id", t("Solr ServerID"), PDT_INT);
 		$this->db_struct->add_required_field("server", t("Solr Servername"), PDT_STRING, 'default');
 		$this->db_struct->add_required_field("host", t("Solr host"), PDT_STRING, $this->core->core_config('core', 'domain'));
