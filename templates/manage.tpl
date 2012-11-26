@@ -14,7 +14,7 @@
 	<%foreach from=$servers item=server%>
 		<tr id="server_row_<%$server.id%>">
 			<td style="text-align: center;"><input type="checkbox" name="selected[]" value="<%$server.id%>" id="dmySelect_<%$server.id%>" class="dmySelect input_checkbox"/></td>
-			<td style="text-align: left;"><a href="/solr/save_server/<%$server.id%>" class="edit_server" onclick="return false;"><span><%$server.server%></span></a></td>
+			<td style="text-align: left;"><a href="/solr/save_server/<%$server.id%>" class="edit_server" did="<%$server.id%>" onclick="return false;"><span><%$server.server%></span></a></td>
 			<td style="text-align: center;">
 				<img src="/modules/solr/templates/images/commit.png" class="ui-icon-soopfw linkedElement dmyCommit" style="background: none" did="<%$server.id%>" title="<%t key='commit server'%>" alt="<%t key='commit server'%>">
 				<img src="/1x1_spacer.gif" class="ui-icon-soopfw ui-icon-soopfw-cancel linkedElement dmyDelete" did="<%$server.id%>" title="<%t key='delete?'%>" alt="<%t key='delete?'%>">
