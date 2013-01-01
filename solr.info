@@ -4,5 +4,5 @@ name = "Solr"
 description = "Provides Solr search"
 
 ;Define rights
-rights[] = "admin.solr.manage"
+rights["admin.solr.manage"] = "Allows managing solr module."
 
